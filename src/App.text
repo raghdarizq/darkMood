@@ -1,0 +1,130 @@
+import { useState } from "react";
+import "./App.css";
+import "./Theam.css";
+
+function App() {
+  const [change, setChange] = useState("peraon");
+  const [Theme, setTheme] = useState("");
+
+  const changeName = () => {
+    setChange("Raghda N. Abu Rizq");
+  };
+  return (
+    <div className={`App ${Theme}`}>
+      <button
+        onClick={() => {
+          setTheme(Theme == "" ? "Dark" : "");
+        }}
+      >
+        Toggle Theam
+      </button>
+      <div
+        className="btn-container"
+        onChange={() => {
+          setTheme(Theme == "" ? "Dark" : "");
+        }}
+      >
+        <label className="switch btn-color-mode-switch">
+          <input
+            type="checkbox"
+            name="color_mode"
+            id="color_mode"
+            defaultValue={1}
+          />
+          <label
+            htmlFor="color_mode"
+            data-on="Dark"
+            data-off="Light"
+            className="btn-color-mode-switch-inner"
+          />
+        </label>
+      </div>
+      <div className={`divbuttons`}>
+        <button
+          onClick={() => {
+            setTheme("");
+          }}
+        >
+          Light
+        </button>
+        <button
+          onClick={() => {
+            setTheme("Dark");
+          }}
+        >
+          Dark
+        </button>
+        <button
+          onClick={() => {
+            setTheme("Grey");
+          }}
+        >
+          Grey
+        </button>
+        <button
+          onClick={() => {
+            setTheme("pink");
+          }}
+        >
+          pink
+        </button>
+      </div>
+      <h1>The Name is {change}</h1>
+      <button onClick={changeName}>changeName</button>
+      <h1>{Theme}</h1>
+    </div>
+  );
+}
+
+export default App;
+//////////////////////////////////////////////////////////
+import { useReducer } from "react";
+import "./App.css";
+import "./Theam.css";
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "ChangeName":
+      return { ...state, name: action.NewValue };
+      default:
+      return state;
+  }
+};
+const theEM = { name: "Raghda N Abu Rizq", age: "20" };
+function App() {
+  const [AllName, dispatch] = useReducer(reducer, { theEM });
+
+  return (
+    <div className={`App`}>
+      <button>Toggle Theam</button>
+      <div className="btn-container">
+        <label className="switch btn-color-mode-switch">
+          <input
+            type="checkbox"
+            name="color_mode"
+            id="color_mode"
+            defaultValue={1}
+          />
+          <label
+            htmlFor="color_mode"
+            data-on="Dark"
+            data-off="Light"
+            className="btn-color-mode-switch-inner"
+          />
+        </label>
+      </div>
+      <div className={`divbuttons`}>
+        <button>Light</button>
+        <button>Dark</button>
+        <button>Grey</button>
+        <button>pink</button>
+      </div>
+      <h1>The Name : {AllName.theEM.name}</h1>
+      <h1>The Age : {AllName.theEM.age}</h1>
+      <button onClick={() => {
+            dispatch({ type: "ChangeName", NewValue: "TheNewName♣" });
+      }}>changeName</button>
+    </div>
+  );
+}
+
+export default App;

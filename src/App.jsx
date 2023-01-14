@@ -1,29 +1,39 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import "./App.css";
 import "./Theam.css";
+const Ftheam = { Color: "Light" };
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "MAKE_DARK":
+      return { ...state, Color: action.NewValue };
+    case "MAKE_LIGHT":
+      return { ...state, Color: action.NewValue };
+    case "MAKE_GREY":
+      return { ...state, Color: action.NewValue };
+    case "MAKE_PINK":
+      return { ...state, Color: action.NewValue };
+    case "TOGGLE_THEAM":
+      return { ...state, Color: action.NewValue };
+    default:
+      return state;
+  }
+};
 function App() {
-  const [change, setChange] = useState("peraon");
-  const [Theme, setTheme] = useState("");
-
-  const changeName = () => {
-    setChange("Raghda N. Abu Rizq");
-  };
+  const [Theam, dispatch] = useReducer(reducer, Ftheam);
   return (
-    <div className={`App ${Theme}`}>
+    <div className={`App ${Theam.Color}`}>
       <button
         onClick={() => {
-          setTheme(Theme == "" ? "Dark" : "");
+          dispatch({
+            type: "TOGGLE_THEAM",
+            NewValue: Theam.Color ==="Dark"? "Light" : "Dark",
+          });
         }}
       >
         Toggle Theam
       </button>
-      <div
-        className="btn-container"
-        onChange={() => {
-          setTheme(Theme == "" ? "Dark" : "");
-        }}
-      >
+      <div className="btn-container">
         <label className="switch btn-color-mode-switch">
           <input
             type="checkbox"
@@ -42,36 +52,35 @@ function App() {
       <div className={`divbuttons`}>
         <button
           onClick={() => {
-            setTheme("");
+            dispatch({ type: "MAKE_LIGHT", NewValue: "Light" });
           }}
         >
           Light
         </button>
         <button
           onClick={() => {
-            setTheme("Dark");
+            dispatch({ type: "MAKE_DARK", NewValue: "Dark" });
           }}
         >
           Dark
         </button>
         <button
           onClick={() => {
-            setTheme("Grey");
+            dispatch({ type: "MAKE_GREY", NewValue: "Grey" });
           }}
         >
           Grey
         </button>
         <button
           onClick={() => {
-            setTheme("pink");
+            dispatch({ type: "MAKE_PINK", NewValue: "pink" });
           }}
         >
           pink
         </button>
       </div>
-      <h1>The Name is {change}</h1>
-      <button onClick={changeName}>changeName</button>
-      <h1>{Theme}</h1>
+      <h1>The Name :Raghda N. Abu Rizq </h1>
+      <h1>The Age : 20</h1>
     </div>
   );
 }
