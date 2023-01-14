@@ -22,23 +22,20 @@ import ThemeContexttt from "./context/DataContext";
 //   }
 // };
 function App() {
-  const { Color, MAKE_LIGHT, MAKE_DARK, MAKE_GREY, MAKE_PINK } =
+  const { Color, MAKE_LIGHT, MAKE_DARK, MAKE_GREY, MAKE_PINK, TOGGLE_THEAM } =
     useContext(ThemeContexttt);
   return (
     <div className={`App ${Color}`}>
       <h1>{Color}</h1>
       <Link to="/Page2">pag2</Link>
 
-      {/* <button
+      <button
         onClick={() => {
-          dispatch({
-            type: "TOGGLE_THEAM",
-            NewValue: Theam.Color === "Dark" ? "Light" : "Dark",
-          });
+          TOGGLE_THEAM();
         }}
       >
         Toggle Theam
-      </button> */}
+      </button>
       <div className={`divbuttons`}>
         <button
           onClick={() => {
