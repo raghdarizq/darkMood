@@ -1,86 +1,74 @@
-import { useReducer } from "react";
-import "./App.css";
+import { useContext } from "react";
 import "./Theam.css";
-const Ftheam = { Color: "Light" };
+import { Link } from "react-router-dom";
+import ThemeContexttt from "./context/DataContext";
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "MAKE_DARK":
-      return { ...state, Color: action.NewValue };
-    case "MAKE_LIGHT":
-      return { ...state, Color: action.NewValue };
-    case "MAKE_GREY":
-      return { ...state, Color: action.NewValue };
-    case "MAKE_PINK":
-      return { ...state, Color: action.NewValue };
-    case "TOGGLE_THEAM":
-      return { ...state, Color: action.NewValue };
-    default:
-      return state;
-  }
-};
+// const reducer = (state, action) => {
+//   switch (action.type) {
+//     case "MAKE_DARK":
+//       return { ...state, Color: action.NewValue };
+//     case "MAKE_LIGHT":
+//       return { ...state, Color: action.NewValue };
+//     case "MAKE_GREY":
+//       return { ...state, Color: action.NewValue };
+//     case "MAKE_PINK":
+//       return { ...state, Color: action.NewValue };
+//     case "TOGGLE_THEAM":
+//       return { ...state, Color: action.NewValue };
+//     case "CHANGE_Name":
+//       return { ...state, name: action.NewValue };
+//     default:
+//       return state;
+//   }
+// };
 function App() {
-  const [Theam, dispatch] = useReducer(reducer, Ftheam);
+  const { Color, MAKE_LIGHT, MAKE_DARK, MAKE_GREY, MAKE_PINK } =
+    useContext(ThemeContexttt);
   return (
-    <div className={`App ${Theam.Color}`}>
-      <button
+    <div className={`App ${Color}`}>
+      <h1>{Color}</h1>
+      <Link to="/Page2">pag2</Link>
+
+      {/* <button
         onClick={() => {
           dispatch({
             type: "TOGGLE_THEAM",
-            NewValue: Theam.Color ==="Dark"? "Light" : "Dark",
+            NewValue: Theam.Color === "Dark" ? "Light" : "Dark",
           });
         }}
       >
         Toggle Theam
-      </button>
-      <div className="btn-container">
-        <label className="switch btn-color-mode-switch">
-          <input
-            type="checkbox"
-            name="color_mode"
-            id="color_mode"
-            defaultValue={1}
-          />
-          <label
-            htmlFor="color_mode"
-            data-on="Dark"
-            data-off="Light"
-            className="btn-color-mode-switch-inner"
-          />
-        </label>
-      </div>
+      </button> */}
       <div className={`divbuttons`}>
         <button
           onClick={() => {
-            dispatch({ type: "MAKE_LIGHT", NewValue: "Light" });
+            MAKE_LIGHT();
           }}
         >
           Light
         </button>
         <button
           onClick={() => {
-            dispatch({ type: "MAKE_DARK", NewValue: "Dark" });
+            MAKE_DARK();
           }}
         >
           Dark
         </button>
         <button
           onClick={() => {
-            dispatch({ type: "MAKE_GREY", NewValue: "Grey" });
+            MAKE_GREY();
           }}
         >
           Grey
         </button>
         <button
           onClick={() => {
-            dispatch({ type: "MAKE_PINK", NewValue: "pink" });
+            MAKE_PINK();
           }}
         >
           pink
         </button>
       </div>
-      <h1>The Name :Raghda N. Abu Rizq </h1>
-      <h1>The Age : 20</h1>
     </div>
   );
 }
