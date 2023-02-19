@@ -1,71 +1,54 @@
-import { useContext } from "react";
-import "./Theam.css";
+import "./App.css";
+import "./theme.css";
 import { Link } from "react-router-dom";
-import ThemeContexttt from "./context/DataContext";
+import { useContext } from "react";
+import ThemeContext from "./context/ThemeContext";
 
-// const reducer = (state, action) => {
-//   switch (action.type) {
-//     case "MAKE_DARK":
-//       return { ...state, Color: action.NewValue };
-//     case "MAKE_LIGHT":
-//       return { ...state, Color: action.NewValue };
-//     case "MAKE_GREY":
-//       return { ...state, Color: action.NewValue };
-//     case "MAKE_PINK":
-//       return { ...state, Color: action.NewValue };
-//     case "TOGGLE_THEAM":
-//       return { ...state, Color: action.NewValue };
-//     case "CHANGE_Name":
-//       return { ...state, name: action.NewValue };
-//     default:
-//       return state;
-//   }
-// };
 function App() {
-  const { Color, MAKE_LIGHT, MAKE_DARK, MAKE_GREY, MAKE_PINK, TOGGLE_THEAM } =
-    useContext(ThemeContexttt);
+  const { name, changeTheme } = useContext(ThemeContext);
   return (
-    <div className={`App ${Color}`}>
-      <h1>{Color}</h1>
-      <Link to="/Page2">pag2</Link>
-
+    <div className={`App ${name}`}>
+      <Link to={`/Page2`}>Page2</Link>
       <button
+        style={{ marginBottom: "44px" }}
         onClick={() => {
-          TOGGLE_THEAM();
+          changeTheme(name === "light" ? "dark" : "light");
         }}
       >
-        Toggle Theam
+        Toggle Theme
       </button>
-      <div className={`divbuttons`}>
+      <div>
         <button
           onClick={() => {
-            MAKE_LIGHT();
+            changeTheme("light");
           }}
         >
           Light
         </button>
         <button
           onClick={() => {
-            MAKE_DARK();
+            changeTheme("dark");
           }}
         >
           Dark
         </button>
         <button
           onClick={() => {
-            MAKE_GREY();
+            changeTheme("grey");
           }}
         >
           Grey
         </button>
         <button
           onClick={() => {
-            MAKE_PINK();
+            changeTheme("pink");
           }}
         >
-          pink
+          Pink
         </button>
       </div>
+      <h2 style={{ marginTop: "66px" }}>My name is : Raghda N Abu Rizq</h2>
+      <h2>My Age is :20 </h2>
     </div>
   );
 }

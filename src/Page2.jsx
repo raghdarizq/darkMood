@@ -1,15 +1,14 @@
-import { useContext } from "react";
-
-import ThemeContexttt from "./context/DataContext";
+import React from 'react';
+import {  useContext } from "react";
+import ThemeContext from "./context/ThemeContext";
 const Page2 = () => {
-    const {Color} =useContext(ThemeContexttt)
+    const { name, changeTheme } = useContext(ThemeContext);
 
-  return (
-    
-    <div className={`App ${Color}`}>
-      <h1>Welcom to Page2</h1>
-    </div>
-  );
-};
+    return (
+        <div className={`App ${name}`}>
+            <h1>Page2</h1>
+        </div>
+    );
+}
 
 export default Page2;
